@@ -1,0 +1,47 @@
+// SPDX-FileCopyrightText: 2025 diggsweden/wallet-backend-reference
+//
+// SPDX-License-Identifier: EUPL-1.2
+
+package com.example.demo.application.exception;
+
+import com.example.demo.application.model.BadRequestDto;
+import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ControllerAdvice
+public class DefaultExceptionHandler {
+
+  private static Logger LOGGER = LoggerFactory.getLogger(DefaultExceptionHandler.class);
+
+  @Autowired
+  private HttpServletRequest httpServletRequest;
+
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  @ExceptionHandler(Throwable.class)
+  public void handleAnyException(Throwable e) {
+    LOGGER.warn("Uncaught exception, responding with 500", e);
+  }
+
+  @ResponseStatus(HttpStatus.NOT_FOUND) // 404 for missing resources
+  @ExceptionHandler(UserNotFoundException.class)
+  public void handleUserNotFoundException() {}
+
+  @ExceptionHandler(InputValidationException.class)
+  public ResponseEntity<BadRequestDto> handleInputValidationException2(InputValidationException e) {
+    var instance = httpServletRequest.getServletPath();
+    var body = new BadRequestDto(
+        null,
+        e.title().description(),
+        400,
+        e.detail(),
+        instance);
+    return ResponseEntity.badRequest().body(body);
+  }
+}
