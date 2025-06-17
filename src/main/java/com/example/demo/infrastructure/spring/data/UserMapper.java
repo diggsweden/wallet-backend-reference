@@ -1,6 +1,6 @@
 package com.example.demo.infrastructure.spring.data;
 
-import com.example.demo.domain.model.User;
+import com.example.demo.domain.User;
 import com.example.demo.infrastructure.model.UserEntity;
 
 // TODO: Vote if we wanna use MapStruct/another lib or do it manually
