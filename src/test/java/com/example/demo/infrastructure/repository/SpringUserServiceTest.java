@@ -13,10 +13,10 @@ import org.junit.jupiter.api.Test;
 import com.example.demo.domain.model.User;
 import com.example.demo.infrastructure.model.UserEntity;
 
-public class UserServiceTest {
+public class SpringUserServiceTest {
     
     private final UserRepository repository = mock(UserRepository.class);
-    private final UserService subject = new UserService(repository);
+    private final SpringUserService subject = new SpringUserService(repository);
 
     @Test
     void findsUserById() {
