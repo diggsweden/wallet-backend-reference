@@ -1,4 +1,4 @@
-package com.example.demo.domain.service;
+package com.example.demo.infrastructure.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import com.example.demo.domain.model.User;
 import com.example.demo.infrastructure.model.UserEntity;
-import com.example.demo.infrastructure.repository.UserRepository;
 
 public class UserServiceTest {
     
