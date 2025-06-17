@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: demo
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
