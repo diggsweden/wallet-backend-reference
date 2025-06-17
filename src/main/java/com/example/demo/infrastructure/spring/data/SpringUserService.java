@@ -1,4 +1,4 @@
-package com.example.demo.infrastructure.repository;
+package com.example.demo.infrastructure.spring.data;
 
 import java.util.Objects;
 import java.util.UUID;
