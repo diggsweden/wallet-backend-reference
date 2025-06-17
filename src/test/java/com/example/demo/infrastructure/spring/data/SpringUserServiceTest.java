@@ -10,7 +10,7 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
-import com.example.demo.domain.model.User;
+import com.example.demo.domain.User;
 import com.example.demo.infrastructure.model.UserEntity;
 
 public class SpringUserServiceTest {
