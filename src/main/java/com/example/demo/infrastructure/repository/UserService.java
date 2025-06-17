@@ -1,4 +1,4 @@
-package com.example.demo.domain.service;
+package com.example.demo.infrastructure.repository;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import com.example.demo.application.exception.NotFoundException;
 import com.example.demo.domain.model.User;
-import com.example.demo.infrastructure.repository.UserRepository;
 
 
 // TODO: Vote in which layer we do the mapping
