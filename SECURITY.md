@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2023 Digg - Agency for Digital Government
+SPDX-FileCopyrightText: 2025 Digg - Agency for Digital Government
 
 SPDX-License-Identifier: CC0-1.0
 -->
@@ -23,7 +23,7 @@ To report a security vulnerability, please provide the following information:
    - Provide a detailed description of the security vulnerability.
    - Include as much information as possible to help us understand and address the issue.
 
-Send this information, along with any additional relevant details, to ospo@digg.se.
+Send this information, along with any additional relevant details, to <ospo@digg.se>.
 
 ## Confidentiality
 

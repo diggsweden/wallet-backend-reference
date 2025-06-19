@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2025 diggsweden/wallet-backend-reference
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 package com.example.demo;
 
 import org.springframework.boot.test.context.TestConfiguration;
@@ -10,16 +14,16 @@ import org.testcontainers.utility.DockerImageName;
 @TestConfiguration(proxyBeanMethods = false)
 class TestcontainersConfiguration {
 
-	@Bean
-	@ServiceConnection
-	KafkaContainer kafkaContainer() {
-		return new KafkaContainer(DockerImageName.parse("apache/kafka-native:latest"));
-	}
+  @Bean
+  @ServiceConnection
+  KafkaContainer kafkaContainer() {
+    return new KafkaContainer(DockerImageName.parse("apache/kafka-native:latest"));
+  }
 
-	@Bean
-	@ServiceConnection
-	PostgreSQLContainer<?> postgresContainer() {
-		return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
-	}
+  @Bean
+  @ServiceConnection
+  PostgreSQLContainer<?> postgresContainer() {
+    return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
+  }
 
 }
