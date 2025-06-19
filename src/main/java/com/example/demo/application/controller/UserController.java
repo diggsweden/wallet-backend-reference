@@ -4,18 +4,17 @@
 
 package com.example.demo.application.controller;
 
-import java.net.URI;
+import static org.springframework.http.ResponseEntity.created;
 
+import com.example.demo.application.model.CreateUserDto;
+import com.example.demo.application.model.UserDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import java.net.URI;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.example.demo.application.model.CreateUserDto;
-import com.example.demo.application.model.UserDto;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RequestMapping("/users")
 public class UserController {
@@ -34,6 +33,6 @@ public class UserController {
   })
   @PostMapping
   public ResponseEntity<UserDto> addUser(CreateUserDto user) {
-    return ResponseEntity.created(URI.create("/users/" + "id")).build(); // ?
+    return created(URI.create("/users/" + "id")).build(); // ?
   }
 }
