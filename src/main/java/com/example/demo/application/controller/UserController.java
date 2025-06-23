@@ -8,6 +8,7 @@ import java.net.URI;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,7 +22,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 public class UserController {
 
   @GetMapping("{id}")
-  public UserDto getUser(String id) {
+  public UserDto getUser(@PathVariable String id) {
     return null;
   }
 
