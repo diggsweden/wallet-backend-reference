@@ -15,13 +15,13 @@ import com.example.demo.domain.model.User;
 
 
 // TODO: Vote in which layer we do the mapping
-public class UserService {
+public class SpringUserService {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SpringUserService.class);
 
   private UserRepository repository;
 
-  public UserService(UserRepository repository) {
+  public SpringUserService(UserRepository repository) {
     this.repository = Objects.requireNonNull(repository);
   }
 
