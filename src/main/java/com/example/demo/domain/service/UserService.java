@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.example.demo.application.exception.NotFoundException;
+import com.example.demo.domain.model.User;
 import com.example.demo.infrastructure.repository.UserRepository;
 
 
@@ -32,5 +33,11 @@ public class UserService {
 
     // TODO: configure logging
     LOGGER.info("test");
+  }
+
+  public User get(UUID id) {
+    return repository.findById(id)
+        .map(UserMapper::toDomain)
+        .orElseThrow(() -> new NotFoundException());
   }
 }
