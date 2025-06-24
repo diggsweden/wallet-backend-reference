@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: EUPL-1.2
 
-package com.example.demo.domain.model;
+package com.example.demo.domain;
 
 import java.time.LocalDate;
 import java.util.UUID;
