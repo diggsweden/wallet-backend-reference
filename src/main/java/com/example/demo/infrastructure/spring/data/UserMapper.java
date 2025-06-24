@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: EUPL-1.2
 
-package com.example.demo.infrastructure.repository;
+package com.example.demo.infrastructure.spring.data;
 
 import com.example.demo.domain.model.User;
 import com.example.demo.infrastructure.model.UserEntity;
