@@ -39,6 +39,7 @@ public class SpringUserService implements UserService {
   public User get(UUID id) {
     return repository.findById(id)
         .map(UserMapper::toDomain)
+        // TODO: We should probably throw a domain specific exception here
         .orElseThrow(() -> new NotFoundException());
   }
 }
