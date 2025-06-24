@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.example.demo.application.exception.NotFoundException;
-import com.example.demo.domain.model.User;
+import com.example.demo.domain.User;
 
 
 // TODO: Vote in which layer we do the mapping
