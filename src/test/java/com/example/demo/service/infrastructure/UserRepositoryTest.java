@@ -29,24 +29,25 @@ import jakarta.transaction.Transactional;
 @Import(TestcontainersConfiguration.class)
 class UserRepositoryTest {
 
-    @Autowired
-    UserRepository userRepository;
-    private UUID userId;
-    @BeforeAll
-    @Transactional
-    void prepareTest() {
-        UserEntity user =  new UserEntity();
-        user.setAddress("Street 1");
-        user.setName("Dummy");
-        user.setBirthDate(LocalDate.of(2024, 01, 01));
-        userRepository.save(user);
-        userId = user.getId();
-    }
+  @Autowired
+  UserRepository userRepository;
+  private UUID userId;
 
-    @Test
-    void testUserRepo() {
-        Optional<UserEntity> user =  userRepository.findById(userId);
-        assertThat(user).isPresent();
-        assertThat(user.get().getAddress()).isEqualTo("Street 1");
-    }
+  @BeforeAll
+  @Transactional
+  void prepareTest() {
+    UserEntity user = new UserEntity();
+    user.setAddress("Street 1");
+    user.setName("Dummy");
+    user.setBirthDate(LocalDate.of(2024, 01, 01));
+    userRepository.save(user);
+    userId = user.getId();
+  }
+
+  @Test
+  void testUserRepo() {
+    Optional<UserEntity> user = userRepository.findById(userId);
+    assertThat(user).isPresent();
+    assertThat(user.get().getAddress()).isEqualTo("Street 1");
+  }
 }
