@@ -5,7 +5,10 @@
 package com.example.demo.domain.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.UUID;
+
+import io.soabase.recordbuilder.core.RecordBuilder;
 
 
 // TODO: We have decided to not use Lombok annotation. But we haven't looked into other alternatives
@@ -14,13 +17,20 @@ import java.util.UUID;
 
 // Immutable classes (records) whenever possible
 // Builder pattern should be used for bigger classes
-public record User(
+
+/**
+ * Immutable record  for User data. 
+ * Recommend use of builder pattern, i.e. 
+ * UserBuilder.builder()
+ */
+@RecordBuilder
+public record User  (
     UUID id,
     String address,
     String name,
     LocalDate birthDate) {
 
   public User {
-    // TODO validate?
+    Objects.requireNonNull(name, "Name cannot be null");
   }
 }

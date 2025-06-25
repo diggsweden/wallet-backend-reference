@@ -39,6 +39,7 @@ SPDX-License-Identifier: EUPL-1.2
         <formatter-maven-plugin.version>2.26.0</formatter-maven-plugin.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
         <checkstyle.version>10.25.0</checkstyle.version>
+        <record-builder.version>47</record-builder.version>
     </properties>
     <dependencies>
         <dependency>
@@ -81,6 +82,12 @@ SPDX-License-Identifier: EUPL-1.2
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.soabase.record-builder</groupId>
+            <artifactId>record-builder-core</artifactId>
+            <version>${record-builder.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -158,6 +165,19 @@ SPDX-License-Identifier: EUPL-1.2
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>io.soabase.record-builder</groupId>
+                            <artifactId>record-builder-processor</artifactId>
+                            <version>${record-builder.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
             </plugin>
 
         <!-- Formatter plugin -->
