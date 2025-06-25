@@ -17,18 +17,18 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(UserController.class)
 class UserControllerTest {
-   
-    @Autowired
-    MockMvc mockMvc;
 
-    @MockitoBean
-    UserController mockController;
+  @Autowired
+  MockMvc mockMvc;
 
-    @Test
-    void noAutorizationTest() throws Exception {
-        when(mockController.getUser(any())).thenReturn(null);
-        String path =  "/users/1";
-        this.mockMvc.perform(get(path)).andExpect(status().isUnauthorized());
-     
-    }
+  @MockitoBean
+  UserController mockController;
+
+  @Test
+  void noAutorizationTest() throws Exception {
+    when(mockController.getUser(any())).thenReturn(null);
+    String path = "/users/1";
+    this.mockMvc.perform(get(path)).andExpect(status().isUnauthorized());
+
+  }
 }
