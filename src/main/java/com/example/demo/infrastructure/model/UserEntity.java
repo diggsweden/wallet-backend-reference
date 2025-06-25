@@ -7,7 +7,16 @@ package com.example.demo.infrastructure.model;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "Users")
 public class UserEntity {
+  @Id
+  @GeneratedValue
   private UUID id;
   private String address;
   private String name;
