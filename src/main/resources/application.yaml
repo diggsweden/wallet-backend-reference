@@ -19,4 +19,3 @@ spring:
     password: test
   liquibase:
     change-log: classpath:db/changelog/changelog-master.xml
-
