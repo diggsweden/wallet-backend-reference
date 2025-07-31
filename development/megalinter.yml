@@ -35,7 +35,7 @@
         MARKDOWN_MARKDOWNLINT,
        # REPOSITORY_GITLEAKS,
         REPOSITORY_SECRETLINT,
-        XML_XMLLINT
+        XML_XMLLINT,
         YAML_PRETTIER,
       ]
     
