@@ -26,6 +26,12 @@ readonly MISSING=$'\xE2\x9D\x8C'
 #MAVEN OPTS
 readonly MAVEN_CLI_OPTS=(--batch-mode --no-transfer-progress --errors --fail-at-end -Dstyle.color=always -DinstallAtEnd=true -DdeployAtEnd=true)
 
+HTTP_PROXY="${HTTP_PROXY:-}"
+HTTPS_PROXY="${HTTPS_PROXY:-}"
+NO_PROXY="${NO_PROXY:-}"
+NODE_OPTIONS="${NODE_OPTIONS:-}"
+NODE_EXTRA_CA_CERTS="${NODE_EXTRA_CA_CERTS:-}"
+
 # Determine container runtime
 CONTAINER_RUNTIME=""
 
@@ -67,6 +73,23 @@ store_exit_code() {
   else
     SUCCESS_MESSAGES["${KEY}"]="${VALID_MESSAGE}"
   fi
+}
+
+format_xml() {
+  print_header 'XML FORMATTING (PRETTIER)'
+
+  ${CONTAINER_RUNTIME} build --tag digg/prettier-xml:snapshot \
+    --build-arg "HTTP_PROXY=$HTTP_PROXY" \
+    --build-arg "HTTPS_PROXY=$HTTPS_PROXY" \
+    --build-arg "NO_PROXY=$NO_PROXY" \
+    --build-arg "NODE_OPTIONS=$NODE_OPTIONS" \
+    --build-arg "NODE_EXTRA_CA_CERTS=$NODE_EXTRA_CA_CERTS" \
+    development/prettier-xml
+
+  ${CONTAINER_RUNTIME} run --rm -v "$(pwd)":/app/source digg/prettier-xml:snapshot --check
+  store_exit_code "$?" "Format" "${MISSING} ${RED}XML formatting check failed. Please review suggested changes.${NC}\n" "${GREEN}${CHECKMARK}${CHECKMARK} XML format check passed${NC}\n"
+  ${CONTAINER_RUNTIME} run --rm -v "$(pwd)":/app/source digg/prettier-xml:snapshot --write
+  printf '\n\n'
 }
 
 lint() {
@@ -142,6 +165,7 @@ is_command_available 'node' 'https://nodejs.org/'
 is_command_available 'npm' 'https://nodejs.org/'
 is_command_available 'sed' ''
 
+format_xml
 lint
 commit
 verify
