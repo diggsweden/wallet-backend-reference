@@ -66,3 +66,8 @@ pnpm-debug.log*
 .npm
 node_modules
 **/megalinter-reports
+
+
+/development/prettier-xml/node_mdules
+/development/prettier-xml/proxy-cert.crt
+
