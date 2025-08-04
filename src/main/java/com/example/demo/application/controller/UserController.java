@@ -4,17 +4,15 @@
 
 package com.example.demo.application.controller;
 
+import com.example.demo.application.model.CreateUserDto;
+import com.example.demo.application.model.UserDto;
 import java.net.URI;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo.application.model.CreateUserDto;
-import com.example.demo.application.model.UserDto;
 
 @RequestMapping("/users")
 @RestController

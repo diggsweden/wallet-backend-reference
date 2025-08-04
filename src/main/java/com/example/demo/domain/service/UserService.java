@@ -4,15 +4,12 @@
 
 package com.example.demo.domain.service;
 
-import java.util.Objects;
-import java.util.UUID;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.example.demo.application.exception.NotFoundException;
 import com.example.demo.infrastructure.repository.UserRepository;
-
+import java.util.Objects;
+import java.util.UUID;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // TODO: Vote in which layer we do the mapping
 public class UserService {
