@@ -45,6 +45,8 @@ DOCKERFILE_HADOLINT_FILE_NAMES_REGEX: ["Containerfile.*"]
 BASH_SHFMT_ARGUMENTS: -i 2
 BASH_SHFMT_FILE_EXTENSIONS: [.sh]
 BASH_SHELLCHECK_FILE_EXTENSIONS: [.sh]
+JAVA_CHECKSTYLE_CLI_EXECUTABLE:
+  ["java", "-Dorg.checkstyle.google.severity=ERROR"]
 JAVA_CHECKSTYLE_FILTER_REGEX_INCLUDE: src/main
 JAVA_CHECKSTYLE_CONFIG_FILE: development/lint/google_checks.xml
 JAVA_PMD_CONFIG_FILE: development/sast/pmd_default_java.xml
