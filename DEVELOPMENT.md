@@ -37,6 +37,7 @@ after running the script.
 
     - [Checkstyle For Java](https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-checkstyle)
     - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+    - [ShellCheck](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)
 
  2. Open workspace settings - settings.json (for example with Ctrl+Shift+P → Preferences: Workspace Settings (JSON)) and add:
 
