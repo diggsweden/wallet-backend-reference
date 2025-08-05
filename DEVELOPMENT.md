@@ -36,6 +36,7 @@ after running the script.
  1. Install plugins:
 
     - [Checkstyle For Java](https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-checkstyle)
+    - [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
     - [PMD for Java](https://marketplace.visualstudio.com/items?itemName=cracrayol.pmd-java)
     - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
     - [ShellCheck](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)
