@@ -29,14 +29,14 @@ This guide outlines core essentials for developing in this project.
  2. Open workspace settings - settings.json (for example with Ctrl+Shift+P → Preferences: Workspace Settings (JSON)) and add:
 
     ```json
-    "[java]": {
-        "editor.defaultFormatter": "redhat.java",
-    },
-    "java.format.settings.url": "development/format/eclipse-java-google-style.xml",
-    "java.format.settings.profile": "GoogleStyle",
     "editor.formatOnSave": true,
     "java.checkstyle.configuration": "development/lint/google_checks.xml",
-    "java.checkstyle.version": "1x.xx.x"
+    "java.checkstyle.version": "1x.xx.x",
+    "java.format.settings.profile": "GoogleStyle",
+    "java.format.settings.url": "development/format/eclipse-java-google-style.xml",
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java",
+    }
     ```
 
 #### IntelliJ
