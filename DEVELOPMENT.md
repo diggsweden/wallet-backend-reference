@@ -36,6 +36,7 @@ after running the script.
  1. Install plugins:
 
     - [Checkstyle For Java](https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-checkstyle)
+    - [PMD for Java](https://marketplace.visualstudio.com/items?itemName=cracrayol.pmd-java)
     - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
     - [ShellCheck](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)
     - [shell-format](https://marketplace.visualstudio.com/items?itemName=foxundermoon.shell-format) version 7.2.5
@@ -57,6 +58,9 @@ after running the script.
     "java.checkstyle.version": "1x.xx.x",
     "java.format.settings.profile": "GoogleStyle",
     "java.format.settings.url": "development/format/eclipse-java-google-style.xml",
+    "javaPMD.rulesets": [
+        "development/sast/pmd_default_java.xml"
+    ],
     "shellformat.path": "<path to shfmt>",
     "[java]": {
         "editor.defaultFormatter": "redhat.java",
