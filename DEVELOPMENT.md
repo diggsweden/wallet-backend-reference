@@ -23,9 +23,21 @@ This guide outlines core essentials for developing in this project.
 
 ### IDE Setup
 
+By running
+[the code quality script](./development/code_quality.sh)
+you will get a list of suggested plugins and configuration for various editors and IDEs,
+e.g. VS Code and IntelliJ.
+Please take a look in
+[the generated file](./megalinter-reports/IDE-config.txt)
+after running the script.
+
 #### VSCode
 
- 1. Install [Checkstyle For Java](https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-checkstyle)
+ 1. Install plugins:
+
+    - [Checkstyle For Java](https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-checkstyle)
+    - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+
  2. Open workspace settings - settings.json (for example with Ctrl+Shift+P → Preferences: Workspace Settings (JSON)) and add:
 
     ```json
@@ -36,6 +48,9 @@ This guide outlines core essentials for developing in this project.
     "java.format.settings.url": "development/format/eclipse-java-google-style.xml",
     "[java]": {
         "editor.defaultFormatter": "redhat.java",
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
     ```
 
