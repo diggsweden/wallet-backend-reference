@@ -70,9 +70,9 @@ store_exit_code() {
 }
 
 lint() {
-  export MEGALINTER_DEF_WORKSPACE='/repo'
+  export MEGALINTER_DEF_WORKSPACE='/github/workspace'
   print_header 'LINTER HEALTH (MEGALINTER)'
-  ${CONTAINER_RUNTIME} run --rm --volume "$(pwd)":/repo -e MEGALINTER_CONFIG='development/megalinter.yml' -e DEFAULT_WORKSPACE=${MEGALINTER_DEF_WORKSPACE} -e LOG_LEVEL=INFO ghcr.io/oxsecurity/megalinter-java:v8.8.0
+  ${CONTAINER_RUNTIME} run --rm --volume "$(pwd)":${MEGALINTER_DEF_WORKSPACE} -e MEGALINTER_CONFIG='development/megalinter.yml' -e DEFAULT_WORKSPACE=${MEGALINTER_DEF_WORKSPACE} -e LOG_LEVEL=INFO ghcr.io/oxsecurity/megalinter-java:v8.8.0
   store_exit_code "$?" "Lint" "${MISSING} ${RED}Lint check failed, see logs (std out and/or ./megalinter-reports) and fix problems.${NC}\n" "${GREEN}${CHECKMARK}${CHECKMARK} Lint check passed${NC}\n"
   printf '\n\n'
 }
