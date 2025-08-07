@@ -65,9 +65,6 @@ after running the script.
     "shellformat.path": "<path to shfmt>",
     "[java]": {
         "editor.defaultFormatter": "redhat.java",
-    },
-    "[yaml]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
     ```
 
