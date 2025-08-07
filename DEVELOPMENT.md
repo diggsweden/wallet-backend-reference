@@ -23,13 +23,19 @@ This guide outlines core essentials for developing in this project.
 
 ### IDE Setup
 
-By running
-[the code quality script](./development/code_quality.sh)
-you will get a list of suggested plugins and configuration for various editors and IDEs,
+Run the code quality script.
+
+```shell
+./development/code_quality.sh
+```
+
+This will run the automated test suite
+and other automation such as linters and formatters.
+As a side effect all required dependencies will be downloaded.
+After running the script, please take a look in
+[the generated IDE configuration file](./megalinter-reports/IDE-config.txt).
+It contains a list of suggested plugins and configuration for various editors and IDEs,
 e.g. VS Code and IntelliJ.
-Please take a look in
-[the generated file](./megalinter-reports/IDE-config.txt)
-after running the script.
 
 #### VSCode
 
