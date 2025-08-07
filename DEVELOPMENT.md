@@ -69,6 +69,9 @@ e.g. VS Code and IntelliJ.
         "development/sast/pmd_default_java.xml"
     ],
     "shellformat.path": "<path to shfmt>",
+    "[markdown]": {
+        "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+    },
     "[java]": {
         "editor.defaultFormatter": "redhat.java",
     }
