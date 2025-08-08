@@ -156,7 +156,7 @@ When submitting a PR, CI will automatically run several checks. To avoid surpris
 
 #### Quality Check Details
 
-- **Linting with megalinter**: BASH, Markdown, YAML, GitHub Actions, security scanning
+- **Linting with megalinter**: BASH, Java, Markdown, XML, YAML, GitHub Actions, security scanning
 - **License Compliance**: REUSE tool ensures proper copyright information
 - **Commit Structure**: Conform checks commit messages for changelog generation
 - **Dependency Analysis**: Scans for vulnerabilities, outdated packages, and license issues
