@@ -6,7 +6,6 @@ SPDX-License-Identifier: CC0-1.0
 
 # Development Guide
 
-This guide outlines core essentials you need to know for developing in this project.
 This guide outlines core essentials for developing in this project.
 
 ## Table of Contents
