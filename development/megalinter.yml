@@ -6,6 +6,9 @@
 # Configuration file for MegaLinter.
 # See configuration options at https://oxsecurity.github.io/megalinter/configuration/ and more in each linter documentation.
 
+PLUGINS:
+  - file:///github/workspace/development/mega-linter-plugin-prettier-xml/prettier-xml.megalinter-descriptor.yml
+
 # General
 PRINT_ALPACA: false
 APPLY_FIXES: all
@@ -38,6 +41,7 @@ ENABLE_LINTERS: [
     # REPOSITORY_GITLEAKS,
     REPOSITORY_SECRETLINT,
     XML_XMLLINT,
+    DIGG_XML_PRETTIER,
     YAML_PRETTIER,
   ]
 
@@ -52,3 +56,12 @@ JAVA_CHECKSTYLE_CONFIG_FILE: development/lint/google_checks.xml
 JAVA_PMD_CONFIG_FILE: development/sast/pmd_default_java.xml
 REPOSITORY_GITLEAKS_ARGUMENTS: detect --log-opts="main..HEAD"
 # LOG_LEVEL: DEBUG # will show you the exact command run
+PRE_COMMANDS:
+  # Install node packages.
+  # This is useful for custom plugins that require additional node packages.
+  # For instance, the Prettier XML plugin requires 'prettier'
+  # and '@prettier/plugin-xml'.
+  # Please make sure they are in your package.json.
+  - command: npm install --include=dev
+    cwd: workspace
+    continue_if_failed: false
