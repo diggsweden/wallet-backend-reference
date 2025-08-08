@@ -9,6 +9,7 @@ descriptor_flavors:
   - cupcake
 file_extensions:
   - ".xml"
+  - ".xsd"
 linters:
   - name: DIGG_XML_PRETTIER
     linter_name: prettier-xml
