@@ -5,6 +5,8 @@
 package com.example.demo.domain.service;
 
 import com.example.demo.application.exception.NotFoundException;
+import com.example.demo.application.mapper.UserDtoMapper;
+import com.example.demo.infrastructure.mapper.UserEntityMapper;
 import com.example.demo.infrastructure.repository.UserRepository;
 import java.util.Objects;
 import java.util.UUID;
@@ -24,8 +26,8 @@ public class UserService {
 
   void todo(UUID id) {
     var unusedUser = repository.findById(id)
-        .map(UserMapper::toDomain)
-        .orElseThrow(() -> new NotFoundException());
+        .map(UserEntityMapper::toDomain)
+        .orElseThrow(NotFoundException::new);
 
     // TODO: configure logging
     LOGGER.info("test");
