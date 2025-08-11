@@ -5,9 +5,11 @@
 package com.example.demo.application.model;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 // TODO validate?
 public record UserDto(
+    UUID id,
     String address,
     String name,
     LocalDate birthDate) {
