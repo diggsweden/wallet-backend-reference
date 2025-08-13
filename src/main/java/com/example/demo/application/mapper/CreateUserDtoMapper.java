@@ -4,30 +4,32 @@
 
 package com.example.demo.application.mapper;
 
-import com.example.demo.application.model.UserDto;
+import com.example.demo.application.model.CreateUserDto;
 import com.example.demo.domain.model.User;
 
-public final class UserDtoMapper {
+import java.util.UUID;
 
-    private UserDtoMapper() {}
+public final class CreateUserDtoMapper {
 
-    public static User toDomain(UserDto dto) {
+    private CreateUserDtoMapper() {}
+
+    public static User toDomain(CreateUserDto dto) {
         if (dto == null) {
             return null;
         }
         return new User(
-                null,
+                UUID.randomUUID(),
                 dto.address(),
                 dto.name(),
                 dto.birthDate()
         );
     }
 
-    public static UserDto toDto(User user) {
+    public static CreateUserDto toDto(User user) {
         if (user == null) {
             return null;
         }
-        return new UserDto(
+        return new CreateUserDto(
                 user.address(),
                 user.name(),
                 user.birthDate()
