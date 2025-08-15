@@ -9,28 +9,19 @@ import com.example.demo.domain.model.User;
 
 public final class UserDtoMapper {
 
-    private UserDtoMapper() {}
+  private UserDtoMapper() {}
 
-    public static User toDomain(UserDto dto) {
-        if (dto == null) {
-            return null;
-        }
-        return new User(
-                null,
-                dto.address(),
-                dto.name(),
-                dto.birthDate()
-        );
+  public static User toDomain(UserDto dto) {
+    if (dto == null) {
+      return null;
     }
+    return new User(null, dto.address(), dto.name(), dto.birthDate());
+  }
 
-    public static UserDto toDto(User user) {
-        if (user == null) {
-            return null;
-        }
-        return new UserDto(
-                user.address(),
-                user.name(),
-                user.birthDate()
-        );
+  public static UserDto toDto(User user) {
+    if (user == null) {
+      return null;
     }
+    return new UserDto(user.address(), user.name(), user.birthDate());
+  }
 }
