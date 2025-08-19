@@ -25,7 +25,10 @@ public class UserService {
 
   void todo(UUID id) {
     var unusedUser =
-        repository.findById(id).map(UserEntityMapper::toDomain).orElseThrow(UserNotFoundException::new);
+        repository
+            .findById(id)
+            .map(UserEntityMapper::toDomain)
+            .orElseThrow(UserNotFoundException::new);
 
     // TODO: configure logging
     LOGGER.info("test");
