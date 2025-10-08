@@ -1,0 +1,52 @@
+# SPDX-FileCopyrightText: 2025 diggsweden/wallet-backend-reference
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# Release Workflow for wallet-backend-reference
+# Maven application with container image publishing (no JReleaser, uses GitHub CLI)
+---
+name: Release Workflow
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"              # Stable: v1.0.0
+      - "v[0-9]+.[0-9]+.[0-9]+-alpha*"       # Alpha: v1.0.0-alpha.1
+      - "v[0-9]+.[0-9]+.[0-9]+-beta*"        # Beta: v1.0.0-beta.1
+      - "v[0-9]+.[0-9]+.[0-9]+-rc*"          # RC: v1.0.0-rc.1
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false  # Queue releases, don't cancel partial releases
+
+permissions:
+  contents: read  # Best Security practice. Jobs only get read as base, and then permissions are added as needed
+
+jobs:
+  release:
+    uses: diggsweden/reusable-ci/.github/workflows/release-orchestrator.yml@v1
+    permissions:
+      contents: write         # Create GitHub releases and tags
+      packages: write         # Publish JARs to GitHub Packages and images to ghcr.io
+      id-token: write        # Generate OIDC token for SLSA provenance attestation
+      actions: read          # Read workflow runs for SLSA provenance generation
+      security-events: write # Upload vulnerability scan results from container scanning
+      attestations: write    # Attach SBOM attestation to container images
+    secrets: inherit  # Use org-level GPG keys if configured
+    with:
+      # Project configuration
+      projectType: maven  # Build system type (determines version file location)
+      
+      # Artifact publisher configuration
+      artifactPublisher: maven-app-github  # Publishes JAR to GitHub Packages
+      
+      # Container builder configuration  
+      containerBuilder: containerimage-ghcr  # Build and push Docker image to ghcr.io
+      container.platforms: "linux/amd64,linux/arm64"  # Multi-arch support for Intel and ARM
+      container.containerfile: "Containerfile"  # Container build file
+      
+      # Changelog configuration
+      changelogCreator: git-cliff  # Generate changelog from conventional commits
+      
+      # Release publisher configuration
+      releasePublisher: github-cli  # Creates GitHub release with changelog and artifacts (no JReleaser)
