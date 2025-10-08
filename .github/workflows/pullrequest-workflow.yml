@@ -10,28 +10,28 @@ on:
     branches:
       - main
       - develop
-      - 'release/**'
-      - 'feature/**'
+      - "release/**"
+      - "feature/**"
 
 permissions:
-  contents: read  # Best Security practice. Jobs only get read as base, and then permissions are added as needed
+  contents: read # Best Security practice. Jobs only get read as base, and then permissions are added as needed
 
 jobs:
   pr-checks:
     uses: diggsweden/reusable-ci/.github/workflows/pullrequest-orchestrator.yml@v1
-    secrets: inherit  # Pass org-level secrets (for private Maven dependencies)
+    secrets: inherit # Pass org-level secrets (for private Maven dependencies)
     permissions:
-      contents: read         # Clone repository and read source code
-      packages: read         # Access GitHub Packages for Maven dependencies
+      contents: read # Clone repository and read source code
+      packages: read # Access GitHub Packages for Maven dependencies
       security-events: write # Upload SpotBugs/dependency check results to Security tab
     with:
       projectType: maven
-      linters.dependencyreview: true  # Keep enabled for reference implementation
-  
+      linters.dependencyreview: true # Keep enabled for reference implementation
+
   test:
     needs: [pr-checks]
-    if: always()  # Run tests even if linting fails (get complete feedback)
+    if: always() # Run tests even if linting fails (get complete feedback)
     permissions:
-      contents: read  # Access test resources and source code
-      packages: read  # Fetch test dependencies from GitHub Packages
+      contents: read # Access test resources and source code
+      packages: read # Fetch test dependencies from GitHub Packages
     uses: ./.github/workflows/test.yml

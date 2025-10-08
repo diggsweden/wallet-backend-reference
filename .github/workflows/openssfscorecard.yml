@@ -14,7 +14,7 @@ on:
     - cron: "30 1 * * 3"
 
 permissions:
-  contents: read  # Best Security practice. Jobs only get read as base, and then permissions are added as needed
+  contents: read # Best Security practice. Jobs only get read as base, and then permissions are added as needed
 
 jobs:
   scorecard-analysis:

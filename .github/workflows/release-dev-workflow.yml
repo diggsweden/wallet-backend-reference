@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: CC0-1.0
 
 # Release Workflow Dev
-# 
+#
 # This workflow triggers the dev release orchestrator for development and feature branches.
 # It creates dev-tagged artifacts and container images for testing.
 #
@@ -22,8 +22,8 @@ on:
 jobs:
   dev-release:
     permissions:
-      contents: read         # Read code for building
-      packages: write         # Push dev images to ghcr.io
+      contents: read # Read code for building
+      packages: write # Push dev images to ghcr.io
     uses: diggsweden/reusable-ci/.github/workflows/release-dev-orchestrator.yml@v1
     with:
       projectType: maven
