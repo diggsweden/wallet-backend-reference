@@ -25,8 +25,7 @@ jobs:
       packages: read # Access GitHub Packages for Maven dependencies
       security-events: write # Upload SpotBugs/dependency check results to Security tab
     with:
-      projectType: maven
-      linters.dependencyreview: true # Keep enabled for reference implementation
+      project-type: maven
 
   test:
     needs: [pr-checks]
