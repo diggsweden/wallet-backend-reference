@@ -4,7 +4,6 @@
 
 # Release Workflow for wallet-backend-reference
 # Maven application with container image publishing (no JReleaser, uses GitHub CLI)
----
 name: Release Workflow
 
 on:
@@ -24,7 +23,7 @@ permissions:
 
 jobs:
   release:
-    uses: diggsweden/reusable-ci/.github/workflows/release-orchestrator.yml@8a16cb75501be27dde6b5fba6c93ae091442d476 # v2.4.1
+    uses: diggsweden/reusable-ci/.github/workflows/release-orchestrator.yml@e29145e720cef0b86ef147c72c2d001b5ac6c8b9 # v2.4.2
     permissions:
       contents: write # Create GitHub releases and tags
       packages: write # Publish JARs to GitHub Packages and images to ghcr.io
