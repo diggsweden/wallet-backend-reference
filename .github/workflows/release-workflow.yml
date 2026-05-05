@@ -23,7 +23,7 @@ permissions:
 
 jobs:
   release:
-    uses: diggsweden/reusable-ci/.github/workflows/release-orchestrator.yml@13cbe3f90715f4cd0e4ef25806342418e8356147 # PR #109 (fix/release-2.8.2)
+    uses: diggsweden/reusable-ci/.github/workflows/release-orchestrator.yml@dd38c9c4d7f7e130579cbce3d8fcbab8af76e7be # PR #109 (fix/release-2.8.2)
     permissions:
       contents: write # Create GitHub releases and tags
       packages: write # Publish JARs to GitHub Packages and images to ghcr.io
@@ -33,7 +33,7 @@ jobs:
       attestations: write # Attach SBOM attestation to container images
     secrets: inherit # Use org-level GPG keys if configured
     with:
-      reusable-ci-ref: 13cbe3f90715f4cd0e4ef25806342418e8356147
+      reusable-ci-ref: dd38c9c4d7f7e130579cbce3d8fcbab8af76e7be
       artifacts-config: .github/artifacts.yml
       changelog-creator: git-cliff
       release-publisher: github-cli
