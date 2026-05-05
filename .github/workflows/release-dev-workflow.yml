@@ -24,9 +24,9 @@ jobs:
     permissions:
       contents: read # Read code for building
       packages: write # Push dev images to ghcr.io
-    uses: diggsweden/reusable-ci/.github/workflows/release-dev-orchestrator.yml@cd56d63b88cf6f1ebb4dc3431986f4208ab85fc5 # v2.8.1
+    uses: diggsweden/reusable-ci/.github/workflows/release-dev-orchestrator.yml@13cbe3f90715f4cd0e4ef25806342418e8356147 # PR #109 (fix/release-2.8.2)
     with:
-      reusable-ci-ref: cd56d63b88cf6f1ebb4dc3431986f4208ab85fc5
+      reusable-ci-ref: 13cbe3f90715f4cd0e4ef25806342418e8356147
       project-type: maven
       # Exercise the full dev SBOM pipeline (build + analyzed-artifact +
       # analyzed-container) on this maven reference repo. r2ps stays on
