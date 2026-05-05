@@ -5,11 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2026-05-04
+
+### Changed
+
+- Use reusable-ci 2.8.x
+- Bump gommitlint to 0.9.10, switch rumdl from ubi to aqua
+- Bump reusable-ci to v2.7.9
+- Use gommitlint instead of conform
+- Update reusable-ci to v2.7.3
+- Use reuseable ci 2.6.0
+- Change devbase-justkit name, improve dev doc
+
+### Fixed
+
+- Correct lintwarnings for docs, checkstyle
+
 ## [0.1.2] - 2025-12-11
 
 ### Changed
 
 - Update justfile and reuseableci
+
 
 ## [0.1.1] - 2025-12-01
 
@@ -65,6 +82,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix code quality issues on the main branch (#16)
 
 
+[0.1.3]: https://github.com/diggsweden/wallet-backend-reference/compare/v0.1.2..v0.1.3
 [0.1.2]: https://github.com/diggsweden/wallet-backend-reference/compare/v0.1.1..v0.1.2
 [0.1.1]: https://github.com/diggsweden/wallet-backend-reference/compare/v0.1.0..v0.1.1
 
