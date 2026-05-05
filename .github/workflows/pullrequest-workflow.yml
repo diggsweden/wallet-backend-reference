@@ -24,7 +24,7 @@ jobs:
       packages: read # Access GitHub Packages for Maven dependencies
       security-events: write # Upload SpotBugs/dependency check results to Security tab
     with:
-      reusable-ci-ref: cd56d63b88cf6f1ebb4dc3431986f4208ab85fc5
+      reusable-ci-ref: v2.8.1
       project-type: maven
       # Use devbase-check linting (replaces megalint, commitlint, licenselint)
       linters.devbasecheck: true
