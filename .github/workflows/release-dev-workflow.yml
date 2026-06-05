@@ -24,12 +24,15 @@ jobs:
     permissions:
       contents: read # Read code for building
       packages: write # Push dev images to ghcr.io
-    uses: diggsweden/reusable-ci/.github/workflows/release-dev-orchestrator.yml@d31c989acd139c3e8754e116496c826af8dbbca0 # v2.8.2
+    uses: diggsweden/reusable-ci/.github/workflows/release-dev-orchestrator.yml@feat/refactor-go # v3 pilot
     with:
-      reusable-ci-ref: d31c989acd139c3e8754e116496c826af8dbbca0
+      reusable-ci-binary-ref: feat/refactor-go
       project-type: maven
       # Exercise the full dev SBOM pipeline (build + analyzed-artifact +
       # analyzed-container) on this maven reference repo. r2ps stays on
       # the default `none` for fast feedback.
       sboms: all
+      runtime-image: ghcr.io/diggsweden/reusable-ci-runtime-base:v3-pre
+      runtime-image-full: ghcr.io/diggsweden/reusable-ci-runtime:v3-pre
+      runtime-image-java: ghcr.io/diggsweden/reusable-ci-runtime-java-25:v3-pre
     secrets: inherit
