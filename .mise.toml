@@ -22,7 +22,7 @@ PIP_INDEX_URL = "{{ get_env(name='PIP_INDEX_URL', default='') }}"
 
 [tools]
 # Project toolchain (also used by nanolinter's java checks, which run mvn).
-java = "temurin-21"
+java = "temurin-25"
 maven = "3.9"
 
 # Lint/security orchestrator — derives a verify plan from the repo and
