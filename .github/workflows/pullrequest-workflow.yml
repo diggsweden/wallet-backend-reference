@@ -11,6 +11,7 @@ on:
       - develop
       - "release/**"
       - "feature/**"
+      - "feat/**" # allow PRs targeting the v3 pilot branch to run these checks
 
 permissions:
   contents: read # Best Security practice. Jobs only get read as base, and then permissions are added as needed
