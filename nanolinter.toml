@@ -1,0 +1,65 @@
+# SPDX-FileCopyrightText: 2025 Digg - Agency for Digital Government
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# nanolinter verify plan (maven project).
+#
+# Strict profile: every check in [verify].checks also appears in
+# [policy].block, so any failure fails `nanolinter verify` (and `just lint`).
+#
+# Inspect plan: `nanolinter dry-run-plan`   Tool health: `nanolinter doctor`
+
+[detect]
+auto = true
+
+[verify]
+checks = [
+  "version-control",
+  "commits",
+  "secrets",
+  "osv",
+  "sast",
+  "typos",
+  "toml",
+  "links",
+  "yaml",
+  "markdown",
+  "license",
+  "container",
+  "xml",
+  "java-checkstyle",
+  "java-pmd",
+  "java-spotbugs",
+  "java-format",
+  "shell",
+  "shell-format",
+  "actions",
+  "trivy-fs",
+  "security-scorecard",
+]
+
+[policy]
+block = [
+  "version-control",
+  "commits",
+  "secrets",
+  "osv",
+  "sast",
+  "typos",
+  "toml",
+  "links",
+  "yaml",
+  "markdown",
+  "license",
+  "container",
+  "xml",
+  "java-checkstyle",
+  "java-pmd",
+  "java-spotbugs",
+  "java-format",
+  "shell",
+  "shell-format",
+  "actions",
+  "trivy-fs",
+  "security-scorecard",
+]

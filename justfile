@@ -2,239 +2,162 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-# Quality checks and automation for Wallet Backend Reference
-# Run 'just' to see available commands
-
-devtools_repo := env("DEVBASE_CHECK_REPO", "https://github.com/diggsweden/devbase-check")
-devtools_dir := env("XDG_DATA_HOME", env("HOME") + "/.local/share") + "/devbase-check"
-lint := devtools_dir + "/linters"
-java_lint := devtools_dir + "/linters/java"
-colors := devtools_dir + "/utils/colors.sh"
+# Quality checks and automation for Wallet Backend Reference.
+#
+# Lint/security orchestration is delegated to nanolinter (pinned in
+# .mise.toml, plan in nanolinter.toml). `just lint` runs the verify plan;
+# the per-check recipes are thin `*args`-forwarding wrappers around
+# `nanolinter lint <check>`.
+#
+# Quick start:
+#   mise install   # install nanolinter + every check tool
+#   just doctor    # confirm tool health
+#   just verify    # run the verify plan + tests
 
 maven_opts := "--batch-mode --no-transfer-progress --errors -Dstyle.color=always"
 
-# Color variables
 CYAN_BOLD := "\\033[1;36m"
 GREEN := "\\033[1;32m"
 BLUE := "\\033[1;34m"
+RED := "\\033[1;31m"
 NC := "\\033[0m"
 
 # ==================================================================================== #
-# DEFAULT - Show available recipes
+# DEFAULT
 # ==================================================================================== #
 
 # Display available recipes
 default:
     @printf "{{CYAN_BOLD}} Wallet Backend Reference{{NC}}\n\n"
-    @printf "Quick start: {{GREEN}}just setup-devtools{{NC}} | {{BLUE}}just verify{{NC}}\n\n"
+    @printf "Quick start: {{GREEN}}mise install{{NC}} | {{BLUE}}just verify{{NC}}\n\n"
     @just --list --unsorted
 
 # ==================================================================================== #
-# SETUP - Development environment setup
+# SETUP
 # ==================================================================================== #
 
-# ▪ Install devtools and tools
+# ▪ Install pinned dev tools (nanolinter + check tools)
 [group('setup')]
-install: setup-devtools tools-install
+install: tools-install
 
-# ▪ Setup devtools (clone or update)
+# Install every tool pinned in .mise.toml
 [group('setup')]
-setup-devtools:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    if [[ -d "{{devtools_dir}}" ]]; then
-        # setup.sh handles update checks with 1-hour cache
-        if [[ -f "{{devtools_dir}}/scripts/setup.sh" ]]; then
-            "{{devtools_dir}}/scripts/setup.sh" "{{devtools_repo}}" "{{devtools_dir}}"
-        fi
-    else
-        printf "Cloning devbase-check to %s...\n" "{{devtools_dir}}"
-        mkdir -p "$(dirname "{{devtools_dir}}")"
-        git clone --depth 1 "{{devtools_repo}}" "{{devtools_dir}}"
-        git -C "{{devtools_dir}}" fetch --tags --depth 1 --quiet
-        latest=$(git -C "{{devtools_dir}}" describe --tags --abbrev=0 origin/main 2>/dev/null || echo "")
-        if [[ -n "$latest" ]]; then
-            git -C "{{devtools_dir}}" fetch --depth 1 origin tag "$latest" --quiet
-            git -C "{{devtools_dir}}" checkout "$latest" --quiet
-        fi
-        printf "Installed devbase-check %s\n" "${latest:-main}"
-    fi
-
-# Check required tools are installed
-[group('setup')]
-check-tools: _ensure-devtools
-    @{{devtools_dir}}/scripts/check-tools.sh --check-devtools mise git just java mvn rumdl yamlfmt actionlint gitleaks shellcheck shfmt gommitlint reuse hadolint
-
-# Install tools via mise
-[group('setup')]
-tools-install: _ensure-devtools
+tools-install:
     @mise install
 
+# Upgrade pinned tools and reinstall
+[group('setup')]
+tools-update:
+    @mise upgrade
+    @mise install
+
+# Show nanolinter's tool/runtime health for the current verify plan
+[group('setup')]
+doctor: (_require-tool "nanolinter" "Install: mise install  (pinned in .mise.toml)")
+    @nanolinter doctor
+
 # ==================================================================================== #
-# VERIFY - Quality assurance
+# VERIFY
 # ==================================================================================== #
 
-# ▪ Run all checks (linters + tests)
+# ▪ Run the nanolinter verify plan + tests
 [group('verify')]
-verify: _ensure-devtools check-tools
-    @{{devtools_dir}}/scripts/verify.sh
-    @just test
+verify: lint test
 
 # ==================================================================================== #
-# LINT - Code quality checks
+# LINT - nanolinter verify plan (plan in nanolinter.toml)
 # ==================================================================================== #
 
-# ▪ Run all linters with summary
+# ▪ Run the full verify plan
 [group('lint')]
-lint-all: _ensure-devtools
-    @{{devtools_dir}}/scripts/verify.sh
+lint *args: (_require-tool "nanolinter" "Install: mise install")
+    @nanolinter verify {{args}}
 
-# Validate version control
-[group('lint')]
-lint-version-control:
-    @{{lint}}/version-control.sh
+# ▪ Apply safe autofixes for every fix-capable check in the plan
+[group('lint-fix')]
+lint-fix *args: (_require-tool "nanolinter" "Install: mise install")
+    @nanolinter fix {{args}}
 
-# Validate commit messages
+# Per-check wrappers (forward flags like --fix / --offline to nanolinter).
 [group('lint')]
-lint-commits:
-    @{{lint}}/commits.sh
+lint-commits *args:
+    @nanolinter lint commits {{args}}
 
-# Scan for secrets
 [group('lint')]
-lint-secrets:
-    @{{lint}}/secrets.sh
+lint-secrets *args:
+    @nanolinter lint secrets {{args}}
 
-# Lint YAML files
 [group('lint')]
-lint-yaml:
-    @{{lint}}/yaml.sh check
+lint-license *args:
+    @nanolinter lint license {{args}}
 
-# Lint markdown files
 [group('lint')]
-lint-markdown:
-    @{{lint}}/markdown.sh check
+lint-yaml *args:
+    @nanolinter lint yaml {{args}}
 
-# Lint shell scripts
 [group('lint')]
-lint-shell:
-    @{{lint}}/shell.sh
+lint-markdown *args:
+    @nanolinter lint markdown {{args}}
 
-# Check shell formatting
 [group('lint')]
-lint-shell-fmt:
-    @{{lint}}/shell-fmt.sh check
+lint-shell *args:
+    @nanolinter lint shell {{args}}
 
-# Lint GitHub Actions
 [group('lint')]
-lint-actions:
-    @{{lint}}/github-actions.sh
+lint-actions *args:
+    @nanolinter lint actions {{args}}
 
-# Check license compliance
 [group('lint')]
-lint-license:
-    @{{lint}}/license.sh
+lint-container *args:
+    @nanolinter lint container {{args}}
 
-# Lint XML files
 [group('lint')]
-lint-xml:
-    @{{lint}}/xml.sh
+lint-xml *args:
+    @nanolinter lint xml {{args}}
 
-# Lint containers
 [group('lint')]
-lint-container:
-    @{{lint}}/container.sh
+lint-sast *args:
+    @nanolinter lint sast {{args}}
 
-# Lint Java code (all: checkstyle, pmd, spotbugs)
 [group('lint')]
-lint-java:
-    @{{java_lint}}/lint.sh
+lint-osv *args:
+    @nanolinter lint osv {{args}}
 
-# Lint Java - checkstyle only
 [group('lint')]
-lint-java-checkstyle:
-    @{{java_lint}}/checkstyle.sh
-
-# Lint Java - pmd only
-[group('lint')]
-lint-java-pmd:
-    @{{java_lint}}/pmd.sh
-
-# Lint Java - spotbugs only
-[group('lint')]
-lint-java-spotbugs:
-    @{{java_lint}}/spotbugs.sh
-
-# Check Java formatting
-[group('lint')]
-lint-java-fmt:
-    @{{java_lint}}/format.sh check
+lint-java *args:
+    @nanolinter lint java {{args}}
 
 # ==================================================================================== #
-# LINT-FIX - Auto-fix code issues
-# ==================================================================================== #
-
-# ▪ Fix all auto-fixable issues
-[group('lint-fix')]
-lint-fix: _ensure-devtools lint-yaml-fix lint-markdown-fix lint-shell-fmt-fix lint-java-fmt-fix
-    #!/usr/bin/env bash
-    source "{{colors}}"
-    just_success "All auto-fixes completed"
-
-# Fix YAML formatting
-[group('lint-fix')]
-lint-yaml-fix:
-    @{{lint}}/yaml.sh fix
-
-# Fix markdown formatting
-[group('lint-fix')]
-lint-markdown-fix:
-    @{{lint}}/markdown.sh fix
-
-# Fix shell formatting
-[group('lint-fix')]
-lint-shell-fmt-fix:
-    @{{lint}}/shell-fmt.sh fix
-
-# Fix Java formatting
-[group('lint-fix')]
-lint-java-fmt-fix:
-    @{{java_lint}}/format.sh fix
-
-# ==================================================================================== #
-# TEST - Run tests
+# TEST / BUILD
 # ==================================================================================== #
 
 # ▪ Run tests
 [group('test')]
 test:
-    @{{java_lint}}/test.sh
+    @mvn {{maven_opts}} test
 
-# ==================================================================================== #
-# BUILD - Build project
-# ==================================================================================== #
-
-# ▪ Build project
+# ▪ Build project (no tests)
 [group('build')]
 build:
-    #!/usr/bin/env bash
-    source "{{colors}}"
-    just_header "Building" "mvn install -DskipTests"
-    mvn {{maven_opts}} install -DskipTests
-    just_success "Build completed"
+    @mvn {{maven_opts}} install -DskipTests
 
 # Clean build artifacts
 [group('build')]
 clean:
-    #!/usr/bin/env bash
-    source "{{colors}}"
-    just_header "Cleaning" "mvn clean"
-    mvn clean
-    just_success "Clean completed"
+    @mvn {{maven_opts}} clean
 
 # ==================================================================================== #
 # INTERNAL
 # ==================================================================================== #
 
 [private]
-_ensure-devtools:
-    @just setup-devtools
+_require-tool tool hint="":
+    #!/usr/bin/env bash
+    if command -v "{{tool}}" >/dev/null 2>&1; then
+        exit 0
+    fi
+    printf "{{RED}}✗ %s not found{{NC}}\n" "{{tool}}" >&2
+    if [[ -n "{{hint}}" ]]; then
+        printf "  %s\n" "{{hint}}" >&2
+    fi
+    exit 1
