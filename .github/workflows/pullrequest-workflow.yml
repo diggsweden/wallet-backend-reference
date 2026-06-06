@@ -17,14 +17,14 @@ permissions:
 
 jobs:
   pr-checks:
-    uses: diggsweden/reusable-ci/.github/workflows/pullrequest-orchestrator.yml@feat/refactor-go # v3 pilot
+    uses: diggsweden/reusable-ci/.github/workflows/pullrequest-orchestrator.yml@v3.0.0-pre # v3 pre-release channel
     secrets: inherit # Pass org-level secrets (private Maven deps + CODE_SCANNING_TOKEN for SARIF)
     permissions:
       contents: read # Clone repository and read source code
       packages: read # Access GitHub Packages for Maven dependencies
       security-events: write # Upload nanolinter security findings to the Security tab
     with:
-      reusable-ci-binary-ref: feat/refactor-go
+      reusable-ci-binary-ref: v3.0.0-pre
       project-type: maven
       # nanolinter is the default (and only) lint route in v3; no toggles needed.
       runtime-image: ghcr.io/diggsweden/reusable-ci-runtime-base:v3-pre

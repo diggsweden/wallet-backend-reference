@@ -20,7 +20,7 @@ jobs:
       contents: read
       security-events: write
       id-token: write
-    uses: diggsweden/reusable-ci/.github/workflows/security-openssf-scorecard.yml@feat/refactor-go # v3 pilot
+    uses: diggsweden/reusable-ci/.github/workflows/security-openssf-scorecard.yml@v3.0.0-pre # v3 pre-release channel
     with:
       publish-results: true
-      reusable-ci-binary-ref: feat/refactor-go
+      reusable-ci-binary-ref: v3.0.0-pre

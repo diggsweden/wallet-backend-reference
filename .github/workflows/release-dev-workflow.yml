@@ -24,9 +24,9 @@ jobs:
     permissions:
       contents: read # Read code for building
       packages: write # Push dev images to ghcr.io
-    uses: diggsweden/reusable-ci/.github/workflows/release-dev-orchestrator.yml@feat/refactor-go # v3 pilot
+    uses: diggsweden/reusable-ci/.github/workflows/release-dev-orchestrator.yml@v3.0.0-pre # v3 pre-release channel
     with:
-      reusable-ci-binary-ref: feat/refactor-go
+      reusable-ci-binary-ref: v3.0.0-pre
       project-type: maven
       # Exercise the full dev SBOM pipeline (build + analyzed-artifact +
       # analyzed-container) on this maven reference repo. r2ps stays on
