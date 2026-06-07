@@ -29,6 +29,8 @@ jobs:
       project-type: maven
       # nanolinter is the default (and only) lint route in v3; no toggles needed.
       runtime-image: ghcr.io/diggsweden/reusable-ci-runtime-base:v3-pre
+      # Lint runs in nanolinter's java-flavour image (baked xmllint + java checks).
+      nanolinter-image: codeberg.org/itiquette/nanolinter:java@sha256:7ddff07ac7bc7cae408e4710ca162718e1ca5ac36f9d53695a5b3391b3e14a12
 
   test:
     needs: [pr-checks]
