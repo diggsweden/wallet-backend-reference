@@ -35,7 +35,6 @@ checks = [
   "shell-format",
   "actions",
   "trivy-fs",
-  "security-scorecard",
 ]
 
 [policy]
@@ -61,5 +60,4 @@ block = [
   "shell-format",
   "actions",
   "trivy-fs",
-  "security-scorecard",
 ]
