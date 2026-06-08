@@ -11,6 +11,7 @@ on:
       - develop
       - "release/**"
       - "feature/**"
+      - "feat/**" # allow PRs targeting the v3 pilot branch to run these checks
 
 permissions:
   contents: read # Best Security practice. Jobs only get read as base, and then permissions are added as needed
@@ -28,6 +29,8 @@ jobs:
       project-type: maven
       # nanolinter is the default (and only) lint route in v3; no toggles needed.
       runtime-image: ghcr.io/diggsweden/reusable-ci-runtime-base:v3-pre
+      # Lint runs in nanolinter's java-flavour image (baked xmllint + java checks).
+      nanolinter-image: codeberg.org/itiquette/nanolinter:java@sha256:4153ec9e35d7e773cc4a029fdc581b4342b1ec89e2b44238b6b159879dd737ab
 
   test:
     needs: [pr-checks]
