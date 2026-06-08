@@ -24,6 +24,7 @@ jobs:
     permissions:
       contents: read # Read code for building
       packages: write # Push dev images to ghcr.io
+      actions: read # Dev SBOM job downloads build artifacts via the Actions API
     uses: diggsweden/reusable-ci/.github/workflows/release-dev-orchestrator.yml@v3.0.0-pre # v3 pre-release channel
     with:
       reusable-ci-binary-ref: v3.0.0-pre
