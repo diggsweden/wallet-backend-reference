@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2025 Digg - Agency for Digital Government
 # SPDX-License-Identifier: CC0-1.0
 
-FROM maven:3.9-eclipse-temurin-21 AS builder
+FROM maven:3.9-eclipse-temurin-25 AS builder
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY src ./src
 COPY development ./development
 RUN mvn clean package -DskipTests -Dcheckstyle.skip=true -B
 
-FROM gcr.io/distroless/java21-debian12
+FROM gcr.io/distroless/java25-debian13
 
 WORKDIR /app
 
